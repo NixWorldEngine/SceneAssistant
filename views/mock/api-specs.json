@@ -1,0 +1,2337 @@
+[
+  {
+    "file": "activity-consume-detail",
+    "description": "获取消费活动详情 展示活动规则/奖励/进度等详细信息",
+    "method": "POST",
+    "path": "/api/activity/consume/detail",
+    "response": {
+      "code": 0,
+      "data": {
+        "id": 1,
+        "name": "消费返利",
+        "description": "消费满额领取奖励",
+        "rewards": [
+          {
+            "threshold": 100,
+            "reward": "10积分",
+            "received": false
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "activity-consume-hash-receivable",
+    "description": "检查用户是否有可领取的消费活动奖励 用于显示奖励提示",
+    "method": "POST",
+    "path": "/api/activity/consume/hashReceivable",
+    "response": {
+      "code": 0,
+      "data": {
+        "receivable": true
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "activity-consume-index",
+    "description": "获取消费活动首页数据 展示当前进行中的消费返利活动信息",
+    "method": "POST",
+    "path": "/api/activity/consume/index",
+    "response": {
+      "code": 0,
+      "data": {
+        "activities": [
+          {
+            "id": 1,
+            "name": "消费返利",
+            "description": "消费满100返10积分",
+            "status": "active"
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "activity-consume-receive-reward",
+    "description": "领取消费活动奖励 用户达到活动条件后领取积分/道具等奖励",
+    "method": "POST",
+    "path": "/api/activity/consume/receiveReward",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "badge-category-badges",
+    "description": "获取指定分类下的徽章列表 按徽章分类展示",
+    "method": "POST",
+    "path": "/api/badge/categoryBadges",
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "category": "成就",
+          "badges": [
+            {
+              "id": 1,
+              "name": "新手",
+              "icon": "https://example.com/badge1.png"
+            }
+          ]
+        }
+      ],
+      "message": "success"
+    }
+  },
+  {
+    "file": "badge-list",
+    "description": "获取系统徽章列表(全局列表 区别于user-badge-list的用户维度) 展示平台所有可用徽章",
+    "method": "POST",
+    "path": "/api/badge/list",
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "id": 1,
+          "name": "新手",
+          "icon": "https://example.com/badge1.png",
+          "description": "注册成功"
+        }
+      ],
+      "message": "success"
+    }
+  },
+  {
+    "file": "captcha-image",
+    "description": "获取图形验证码 返回验证码图片和captchaId 用于登录时的人机验证",
+    "method": "POST",
+    "path": "/api/captcha/image",
+    "response": {
+      "code": 0,
+      "data": {
+        "captchaId": "abc123",
+        "image": "data:image/png;base64,iVBOR..."
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "chat-completions-stream",
+    "description": "发送消息并以SSE流式方式获取AI角色回复 实时逐字输出回复内容 提供更好的交互体验 是v1版聊天的流式接口",
+    "method": "SSE",
+    "path": "/api/chat/completions/stream",
+    "response": [
+      {
+        "event": "message",
+        "data": {
+          "content": "你",
+          "id": 1
+        }
+      },
+      {
+        "event": "message",
+        "data": {
+          "content": "好",
+          "id": 1
+        }
+      },
+      {
+        "event": "done",
+        "data": {
+          "content": "",
+          "id": 1
+        }
+      }
+    ],
+    "sseEvents": true
+  },
+  {
+    "file": "chat-completions",
+    "description": "发送消息并获取AI角色回复(非流式) 是v1版聊天的核心接口 提交用户消息后返回完整的AI回复内容",
+    "method": "POST",
+    "path": "/api/chat/completions",
+    "response": {
+      "code": 200,
+      "data": {
+        "id": 1,
+        "roleId": 1,
+        "createTime": "2026-02-16 12:00:00",
+        "content": "你好",
+        "contentEn": "Hello",
+        "direction": "receive",
+        "type": "text",
+        "userId": 1
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "chat-help",
+    "description": "获取聊天帮助信息 提供对话相关的帮助提示/快捷操作说明 在聊天界面展示帮助内容",
+    "method": "POST",
+    "path": "/api/chat/help",
+    "response": {
+      "code": 200,
+      "data": {
+        "suggestions": [
+          "你好",
+          "介绍一下自己",
+          "今天天气怎么样"
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "chat2-completions-stream",
+    "description": "v2版聊天流式接口 以SSE方式实时返回AI回复 v2版本的主力对话接口",
+    "method": "SSE",
+    "path": "/api/chat2/completions/stream",
+    "response": [
+      {
+        "event": "message",
+        "data": {
+          "content": "你",
+          "id": 1
+        }
+      },
+      {
+        "event": "message",
+        "data": {
+          "content": "好",
+          "id": 1
+        }
+      },
+      {
+        "event": "done",
+        "data": {
+          "content": "",
+          "id": 1
+        }
+      }
+    ],
+    "sseEvents": true
+  },
+  {
+    "file": "chat2-completions",
+    "description": "v2版聊天接口(非流式) 相比v1可能支持更多功能特性 如多轮对话优化/知识库集成等",
+    "method": "POST",
+    "path": "/api/chat2/completions",
+    "response": {
+      "code": 200,
+      "data": {
+        "id": 1,
+        "roleId": 1,
+        "createTime": "2026-02-16 12:00:00",
+        "content": "你好",
+        "contentEn": "Hello",
+        "direction": "receive",
+        "type": "text",
+        "userId": 1
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "commission-invite-list",
+    "description": "查询佣金邀请列表 展示邀请好友获得的佣金奖励记录 可能是现金形式的分销奖励",
+    "method": "POST",
+    "path": "/api/commission/invite/list",
+    "response": {
+      "code": 0,
+      "data": {
+        "total": 5,
+        "list": [
+          {
+            "id": 1,
+            "userId": 2,
+            "nickname": "user2",
+            "commission": 10.5,
+            "createTime": "2026-01-01 00:00:00"
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "conf-activity-category-list",
+    "description": "获取活动分类列表 展示各类运营活动的分类信息",
+    "method": "POST",
+    "path": "/api/conf/activity/category/list",
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "id": 1,
+          "name": "日常活动"
+        }
+      ],
+      "message": "success"
+    }
+  },
+  {
+    "file": "conf-query",
+    "description": "查询系统配置信息 获取全局配置如支付开关状态(支付宝/微信/USDT)/功能开关/版本信息等 在页面初始化时调用",
+    "method": "POST",
+    "path": "/api/conf/query",
+    "response": {
+      "code": 0,
+      "data": {
+        "siteName": "AgenticCharacter",
+        "logo": "https://example.com/logo.png",
+        "defaultModelId": 1,
+        "models": [
+          {
+            "id": 1,
+            "name": "GPT-4"
+          }
+        ],
+        "features": {}
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "conversation-change",
+    "description": "切换当前活跃的v1版会话 用于在同一角色的多个会话间切换",
+    "method": "POST",
+    "path": "/api/conversation/change",
+    "response": {
+      "code": 200,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "conversation-delete",
+    "description": "删除v1版指定会话 同时删除该会话下的所有消息记录",
+    "method": "POST",
+    "path": "/api/conversation/delete",
+    "response": {
+      "code": 200,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "conversation-list",
+    "description": "获取v1版会话列表 展示用户与各角色的对话会话 用于会话管理/切换",
+    "method": "POST",
+    "path": "/api/conversation/list",
+    "response": {
+      "code": 200,
+      "data": [
+        {
+          "id": 1,
+          "name": "新会话",
+          "roleId": 1,
+          "createTime": "2026-02-16 12:00:00",
+          "updateTime": "2026-02-16 12:00:00"
+        }
+      ],
+      "message": "success"
+    }
+  },
+  {
+    "file": "conversation-remove",
+    "description": "从列表中移除v1版会话(可能是软删除 不同于conversation-delete的硬删除)",
+    "method": "POST",
+    "path": "/api/conversation/remove",
+    "response": {
+      "code": 200,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "conversation2-create",
+    "description": "创建v2版新会话 与指定角色开始新的对话 一个角色可以有多个独立会话",
+    "method": "POST",
+    "path": "/api/conversation2/create",
+    "response": {
+      "code": 200,
+      "data": {
+        "id": 1
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "conversation2-delete",
+    "description": "删除v2版指定会话",
+    "method": "POST",
+    "path": "/api/conversation2/delete",
+    "response": {
+      "code": 200,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "conversation2-edit",
+    "description": "编辑v2版会话信息 如修改会话标题等",
+    "method": "POST",
+    "path": "/api/conversation2/edit",
+    "response": {
+      "code": 200,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "conversation2-list",
+    "description": "获取v2版会话列表",
+    "method": "POST",
+    "path": "/api/conversation2/list",
+    "response": {
+      "code": 200,
+      "data": [
+        {
+          "id": 1,
+          "name": "新会话",
+          "roleId": 1,
+          "createTime": "2026-02-16 12:00:00",
+          "updateTime": "2026-02-16 12:00:00"
+        }
+      ],
+      "message": "success"
+    }
+  },
+  {
+    "file": "email-send-code",
+    "description": "发送邮箱验证码 向指定邮箱发送验证码 用于注册/绑定邮箱/邮箱修改密码等场景",
+    "method": "POST",
+    "path": "/api/email/send/code",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "google-auth",
+    "description": "Google第三方登录认证 提交Google OAuth返回的认证信息 服务端验证后返回token和用户信息",
+    "method": "POST",
+    "path": "/api/google/auth",
+    "response": {
+      "code": 0,
+      "data": {
+        "token": "eyJhbGciOiJIUzI1NiJ9",
+        "userInfo": {
+          "id": 1,
+          "nickname": "user1",
+          "avatar": "https://example.com/avatar.png",
+          "email": "user@example.com"
+        }
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "help-list",
+    "description": "获取帮助中心文章列表 展示FAQ/使用教程/常见问题等帮助文档",
+    "method": "POST",
+    "path": "/api/help/list",
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "id": 1,
+          "title": "如何使用",
+          "content": "请按照以下步骤操作"
+        }
+      ],
+      "message": "success"
+    }
+  },
+  {
+    "file": "instruction-delete",
+    "description": "删除指定的自定义指令",
+    "method": "POST",
+    "path": "/api/instruction/delete",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "instruction-list",
+    "description": "获取用户自定义指令列表 指令是用户预设的提示词模板 在对话中快速插入 类似快捷回复",
+    "method": "POST",
+    "path": "/api/instruction/list",
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "id": 1,
+          "name": "问候",
+          "content": "你好 请问有什么可以帮助你的",
+          "sort": 1
+        }
+      ],
+      "message": "success"
+    }
+  },
+  {
+    "file": "instruction-move",
+    "description": "调整指令的排序位置 通过拖拽或上下移动改变指令在列表中的顺序",
+    "method": "POST",
+    "path": "/api/instruction/move",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "instruction-reset",
+    "description": "重置指令列表到默认状态 恢复系统默认的指令模板 清除用户自定义的修改",
+    "method": "POST",
+    "path": "/api/instruction/reset",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "instruction-save",
+    "description": "保存/创建新的自定义指令 或更新已有指令内容",
+    "method": "POST",
+    "path": "/api/instruction/save",
+    "response": {
+      "code": 0,
+      "data": {
+        "id": 1
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "log-chat-export",
+    "description": "导出聊天记录 将对话历史导出为文件(如txt/json格式) 用于备份或分享完整对话",
+    "method": "POST",
+    "path": "/api/log/chat/export",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "message-delete",
+    "description": "删除v1版会话中的指定消息",
+    "method": "POST",
+    "path": "/api/message/delete",
+    "response": {
+      "code": 200,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "message-edit",
+    "description": "编辑v1版会话中的消息内容 可以修改已发送的用户消息或AI回复",
+    "method": "POST",
+    "path": "/api/message/edit",
+    "response": {
+      "code": 200,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "message-history-page",
+    "description": "分页获取v1版会话的历史消息列表 在进入聊天页面时加载历史对话记录",
+    "method": "POST",
+    "path": "/api/message/history/page",
+    "response": {
+      "code": 200,
+      "data": {
+        "total": 100,
+        "list": [
+          {
+            "id": 1,
+            "content": "你好",
+            "contentEn": "Hello",
+            "direction": "send",
+            "type": "text",
+            "createTime": "2026-02-16 12:00:00",
+            "userId": 1
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "message-regenerate-stream",
+    "description": "流式重新生成v1版AI回复 以SSE方式实时返回新的回复内容",
+    "method": "SSE",
+    "path": "/api/message/regenerate/stream",
+    "response": [
+      {
+        "event": "message",
+        "data": {
+          "content": "重新",
+          "id": 1
+        }
+      },
+      {
+        "event": "message",
+        "data": {
+          "content": "生成",
+          "id": 1
+        }
+      },
+      {
+        "event": "done",
+        "data": {
+          "content": "",
+          "id": 1
+        }
+      }
+    ],
+    "sseEvents": true
+  },
+  {
+    "file": "message-regenerate",
+    "description": "重新生成v1版会话中AI的最后一条回复(非流式) 当用户对AI回复不满意时使用",
+    "method": "POST",
+    "path": "/api/message/regenerate",
+    "response": {
+      "code": 200,
+      "data": {
+        "id": 1,
+        "content": "重新生成的回复内容"
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "message-summary-switch",
+    "description": "开启或关闭v1版会话的自动摘要功能 开启后系统会自动对较长的对话生成摘要 节省上下文空间",
+    "method": "POST",
+    "path": "/api/message/summary/switch",
+    "response": {
+      "code": 200,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "message-truncate",
+    "description": "截断v1版会话 从指定消息位置截断 删除之后的所有消息 用于回退对话到某个节点",
+    "method": "POST",
+    "path": "/api/message/truncate",
+    "response": {
+      "code": 200,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "message2-delete",
+    "description": "删除v2版会话中的指定消息",
+    "method": "POST",
+    "path": "/api/message2/delete",
+    "response": {
+      "code": 200,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "message2-edit",
+    "description": "编辑v2版会话中的消息内容",
+    "method": "POST",
+    "path": "/api/message2/edit",
+    "response": {
+      "code": 200,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "message2-history",
+    "description": "获取v2版会话的历史消息 在进入聊天页面时加载历史对话记录",
+    "method": "POST",
+    "path": "/api/message2/history",
+    "response": {
+      "code": 200,
+      "data": {
+        "total": 100,
+        "list": [
+          {
+            "id": 1,
+            "content": "你好",
+            "contentEn": "Hello",
+            "direction": "send",
+            "type": "text",
+            "createTime": "2026-02-16 12:00:00"
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "message2-regenerate-stream",
+    "description": "流式重新生成v2版AI回复",
+    "method": "SSE",
+    "path": "/api/message2/regenerate/stream",
+    "response": [
+      {
+        "event": "message",
+        "data": {
+          "content": "重新",
+          "id": 1
+        }
+      },
+      {
+        "event": "message",
+        "data": {
+          "content": "生成",
+          "id": 1
+        }
+      },
+      {
+        "event": "done",
+        "data": {
+          "content": "",
+          "id": 1
+        }
+      }
+    ],
+    "sseEvents": true
+  },
+  {
+    "file": "message2-regenerate",
+    "description": "重新生成v2版会话中AI的最后一条回复(非流式)",
+    "method": "POST",
+    "path": "/api/message2/regenerate",
+    "response": {
+      "code": 200,
+      "data": {
+        "id": 1,
+        "content": "重新生成的回复内容"
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "message2-summary-switch",
+    "description": "开启或关闭v2版会话的自动摘要功能",
+    "method": "POST",
+    "path": "/api/message2/summary/switch",
+    "response": {
+      "code": 200,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "message2-truncate",
+    "description": "截断v2版会话 从指定消息位置截断",
+    "method": "POST",
+    "path": "/api/message2/truncate",
+    "response": {
+      "code": 200,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "model-list",
+    "description": "获取可用的AI模型列表 展示用户可选择的不同AI模型(不同能力/价格) 在角色设置或对话设置中使用",
+    "method": "POST",
+    "path": "/api/model/list",
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "id": 1,
+          "name": "GPT-4",
+          "description": "高级语言模型",
+          "maxToken": 8192
+        }
+      ],
+      "message": "success"
+    }
+  },
+  {
+    "file": "msg-share-record",
+    "description": "查看消息分享记录 获取用户的分享历史",
+    "method": "POST",
+    "path": "/api/msgShare/record",
+    "response": {
+      "code": 200,
+      "data": {
+        "shareId": "abc123def456"
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "msg-share-share",
+    "description": "分享对话消息 将指定的对话内容生成分享链接或分享卡片",
+    "method": "POST",
+    "path": "/api/msgShare/share",
+    "response": {
+      "code": 200,
+      "data": {
+        "messages": [
+          {
+            "content": "你好",
+            "direction": "send"
+          },
+          {
+            "content": "你好 有什么可以帮你的",
+            "direction": "receive"
+          }
+        ],
+        "roleName": "助手",
+        "roleAvatar": "https://example.com/avatar.png"
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "notice-clean-unread-count",
+    "description": "一键清除所有未读公告数量 将未读计数归零 不需要逐条标记已读",
+    "method": "POST",
+    "path": "/api/notice/cleanUnreadCount",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "notice-list",
+    "description": "获取系统公告列表 展示平台发布的通知/公告/更新说明等",
+    "method": "POST",
+    "path": "/api/notice/list",
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "id": 1,
+          "title": "系统更新",
+          "content": "系统将于今晚维护",
+          "createTime": "2026-01-01 00:00:00"
+        }
+      ],
+      "message": "success"
+    }
+  },
+  {
+    "file": "notice-page",
+    "description": "分页获取系统公告列表 支持分页加载更多公告",
+    "method": "POST",
+    "path": "/api/notice/page",
+    "response": {
+      "code": 0,
+      "data": {
+        "total": 50,
+        "list": [
+          {
+            "id": 1,
+            "title": "系统更新",
+            "content": "系统将于今晚维护",
+            "createTime": "2026-01-01 00:00:00",
+            "type": "system"
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "notice-unread-count",
+    "description": "获取未读公告数量 用于显示消息角标/红点提示",
+    "method": "POST",
+    "path": "/api/notice/unreadCount",
+    "response": {
+      "code": 0,
+      "data": {
+        "count": 3
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "notice-viewed",
+    "description": "标记公告为已读 用户查看公告后调用 减少未读计数",
+    "method": "POST",
+    "path": "/api/notice/viewed",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "notification-change-status",
+    "description": "修改通知状态 如标记为已读/全部已读",
+    "method": "POST",
+    "path": "/api/notification/changeStatus",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "notification-page",
+    "description": "分页获取用户通知列表 通知包括评论回复/关注提醒/系统消息等个人相关通知(区别于公告notice)",
+    "method": "POST",
+    "path": "/api/notification/page",
+    "response": {
+      "code": 0,
+      "data": {
+        "total": 20,
+        "list": [
+          {
+            "id": 1,
+            "type": "system",
+            "content": "欢迎使用",
+            "createTime": "2026-01-01 00:00:00",
+            "read": false
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "notification-unread-count",
+    "description": "获取未读通知数量 用于消息中心角标/红点提示",
+    "method": "POST",
+    "path": "/api/notification/unreadCount",
+    "response": {
+      "code": 0,
+      "data": {
+        "count": 5
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "points-invite-list",
+    "description": "查询积分邀请奖励列表 展示通过邀请好友获得的积分奖励记录",
+    "method": "POST",
+    "path": "/api/points/invite/list",
+    "response": {
+      "code": 0,
+      "data": {
+        "total": 10,
+        "list": [
+          {
+            "id": 1,
+            "userId": 2,
+            "nickname": "user2",
+            "points": 50,
+            "createTime": "2026-01-01 00:00:00"
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "points-transaction-list",
+    "description": "查询积分交易记录列表 展示积分的收入/支出明细 包括充值/消费/签到奖励等",
+    "method": "POST",
+    "path": "/api/points/transaction/list",
+    "response": {
+      "code": 0,
+      "data": {
+        "total": 100,
+        "list": [
+          {
+            "id": 1,
+            "type": "recharge",
+            "amount": 100,
+            "description": "充值",
+            "createTime": "2026-01-01 00:00:00"
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "recharge-order-cny",
+    "description": "创建人民币充值订单 支持支付宝/微信支付方式 返回支付链接跳转到支付页面",
+    "method": "POST",
+    "path": "/api/recharge/order/cny",
+    "response": {
+      "code": 0,
+      "data": {
+        "orderId": "ORD20260101002",
+        "payUrl": "https://pay.example.com/order/xxx"
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "recharge-order-usdt",
+    "description": "创建USDT充值订单 选择TRC20-USDT支付方式时调用 返回支付链接跳转到支付页面",
+    "method": "POST",
+    "path": "/api/recharge/order/usdt",
+    "response": {
+      "code": 0,
+      "data": {
+        "orderId": "ORD20260101001",
+        "address": "TXxxxxxxxxxxxxx",
+        "amount": 9.99
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "recharge-query",
+    "description": "查询充值档位列表 获取可选的充值金额/积分数量/赠送积分等信息 用于充值页面展示",
+    "method": "POST",
+    "path": "/api/recharge/query",
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "id": 1,
+          "name": "基础套餐",
+          "points": 100,
+          "price": 9.99,
+          "currency": "USD"
+        }
+      ],
+      "message": "success"
+    }
+  },
+  {
+    "file": "recommend-behavior-report-dislike",
+    "description": "上报用户不喜欢/不感兴趣的行为数据 用于推荐算法排除用户不感兴趣的内容",
+    "method": "POST",
+    "path": "/api/recommend/behavior/report/dislike",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "recommend-behavior-report",
+    "description": "上报用户行为数据 用于推荐算法优化 记录用户的浏览/点击/对话等行为",
+    "method": "POST",
+    "path": "/api/recommend/behavior/report",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "redeem-code-use",
+    "description": "使用兑换码 输入兑换码获取对应奖励(积分/VIP等) 每个兑换码只能使用一次",
+    "method": "POST",
+    "path": "/api/redeem_code/use",
+    "response": {
+      "code": 0,
+      "data": {
+        "reward": "points",
+        "amount": 100
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "regexp-list",
+    "description": "获取全局正则表达式模板列表 系统预设的正则规则模板 用户可从中选择应用到角色上",
+    "method": "POST",
+    "path": "/api/regexp/list",
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "id": 1,
+          "pattern": "\btest\b",
+          "replacement": "***"
+        }
+      ],
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-alias",
+    "description": "为角色设置别名 用户可以为自己对话的角色起一个自定义名称 不影响其他用户看到的角色名",
+    "method": "POST",
+    "path": "/api/role/alias",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-anonymity-switch",
+    "description": "切换角色的匿名模式 开启后对话内容不会被记录到公开的对话统计中 保护用户隐私",
+    "method": "POST",
+    "path": "/api/role/anonymity/switch",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-background-set",
+    "description": "设置角色聊天界面的背景图片 自定义对话页面的视觉效果",
+    "method": "POST",
+    "path": "/api/role/background/set",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-category-list",
+    "description": "获取角色分类列表 用于角色创建时选择分类 以及角色广场的分类筛选条件",
+    "method": "POST",
+    "path": "/api/role/category/list",
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "id": 1,
+          "name": "游戏",
+          "icon": "https://example.com/icon.png"
+        }
+      ],
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-comment-cancel-top",
+    "description": "取消评论置顶 仅角色创建者有权操作",
+    "method": "POST",
+    "path": "/api/role/comment/cancelTop",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-comment-create",
+    "description": "对角色发表评论 需要登录状态",
+    "method": "POST",
+    "path": "/api/role/comment/create",
+    "response": {
+      "code": 0,
+      "data": {
+        "id": 1
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-comment-delete",
+    "description": "删除自己发表的评论 或者角色创建者删除角色下的评论",
+    "method": "POST",
+    "path": "/api/role/comment/delete",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-comment-like",
+    "description": "对评论点赞或取消点赞 toggle操作",
+    "method": "POST",
+    "path": "/api/role/comment/like",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-comment-page",
+    "description": "分页获取角色评论列表 在角色详情页展示用户评论 支持按时间/热度排序",
+    "method": "POST",
+    "path": "/api/role/comment/page",
+    "response": {
+      "code": 0,
+      "data": {
+        "total": 20,
+        "list": [
+          {
+            "id": 1,
+            "content": "很好的角色",
+            "userId": 1,
+            "nickname": "用户A",
+            "avatar": "https://example.com/avatar.png",
+            "createTime": "2026-02-16 12:00:00",
+            "likeCount": 5,
+            "isLiked": false
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-comment-report",
+    "description": "举报评论 提交举报理由 由平台管理员审核处理",
+    "method": "POST",
+    "path": "/api/role/comment/report",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-comment-switch",
+    "description": "开启或关闭角色的评论功能 仅角色创建者有权操作 关闭后其他用户无法对该角色发表评论",
+    "method": "POST",
+    "path": "/api/role/comment/switch",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-comment-top",
+    "description": "将评论置顶 仅角色创建者有权操作 置顶评论会显示在评论列表最前面",
+    "method": "POST",
+    "path": "/api/role/comment/top",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-customize-list",
+    "description": "获取角色自定义配置列表 包含可自定义的角色属性选项 用于角色创建/编辑页面",
+    "method": "POST",
+    "path": "/api/role/customize/list",
+    "response": {
+      "code": 0,
+      "data": {
+        "systemPrompt": "你是一个友善的助手",
+        "openingMessage": "你好",
+        "modelId": 1
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-delete",
+    "description": "删除指定角色 只有角色创建者有权删除 删除后角色不可恢复 相关的对话记录也会清除",
+    "method": "POST",
+    "path": "/api/role/delete",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-edit",
+    "description": "编辑已有角色的信息 包括设定/头像/描述等 只有角色创建者有权编辑",
+    "method": "POST",
+    "path": "/api/role/edit",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-favourite",
+    "description": "收藏或取消收藏角色 toggle操作 收藏后可在 role-list-fav 中查看收藏列表",
+    "method": "POST",
+    "path": "/api/role/favourite",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-follow-clear-unread",
+    "description": "清除关注用户发布新角色的未读标记 将未读新角色数量归零",
+    "method": "POST",
+    "path": "/api/role/follow/clearUnread",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-follow-follow-user-list",
+    "description": "获取关注用户新发布的角色列表 展示关注的创作者最近发布的角色",
+    "method": "POST",
+    "path": "/api/role/follow/followUser/list",
+    "response": {
+      "code": 0,
+      "data": {
+        "total": 5,
+        "list": [
+          {
+            "id": 1,
+            "name": "用户A",
+            "avatar": "https://example.com/avatar.png"
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-follow-has-new-role",
+    "description": "检查关注的用户是否有新发布的角色 用于显示关注页面的红点/未读提示",
+    "method": "POST",
+    "path": "/api/role/follow/hasNewRole",
+    "response": {
+      "code": 0,
+      "data": {
+        "hasNew": true
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-like",
+    "description": "对角色点赞或取消点赞 toggle操作 点赞数会影响角色在热门列表中的排名",
+    "method": "POST",
+    "path": "/api/role/like",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-list-fav",
+    "description": "获取用户收藏的角色列表 通过导入的API变量在index主入口页面间接调用",
+    "method": "POST",
+    "path": "/api/role/list/fav",
+    "response": {
+      "code": 0,
+      "data": {
+        "total": 10,
+        "list": [
+          {
+            "id": 1,
+            "name": "收藏角色",
+            "avatar": "https://example.com/avatar.png",
+            "description": "收藏角色描述"
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-list-hot",
+    "description": "获取热门角色列表 按热度排序 通常在首页/推荐位展示",
+    "method": "POST",
+    "path": "/api/role/list/hot",
+    "response": {
+      "code": 0,
+      "data": {
+        "total": 50,
+        "list": [
+          {
+            "id": 1,
+            "name": "热门角色",
+            "avatar": "https://example.com/avatar.png",
+            "description": "热门角色描述",
+            "likeCount": 500,
+            "chatCount": 2000
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-list-recommend",
+    "description": "获取推荐角色列表 基于算法推荐 可能通过导入的API变量在index主入口页面间接调用",
+    "method": "POST",
+    "path": "/api/role/list/recommend",
+    "response": {
+      "code": 0,
+      "data": {
+        "total": 20,
+        "list": [
+          {
+            "id": 1,
+            "name": "推荐角色",
+            "avatar": "https://example.com/avatar.png",
+            "description": "推荐角色描述"
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-list-topic",
+    "description": "获取指定话题下的角色列表 用于话题详情页展示该话题相关的角色",
+    "method": "POST",
+    "path": "/api/role/list/topic",
+    "response": {
+      "code": 0,
+      "data": {
+        "total": 15,
+        "list": [
+          {
+            "id": 1,
+            "name": "话题角色",
+            "avatar": "https://example.com/avatar.png",
+            "description": "话题角色描述"
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-list",
+    "description": "获取角色列表 支持分页和筛选 是角色广场的核心接口 展示可用角色供用户选择对话",
+    "method": "POST",
+    "path": "/api/role/list",
+    "response": {
+      "code": 0,
+      "data": {
+        "total": 100,
+        "list": [
+          {
+            "id": 1,
+            "name": "角色A",
+            "avatar": "https://example.com/avatar.png",
+            "description": "角色描述",
+            "category": "游戏",
+            "likeCount": 50,
+            "chatCount": 200,
+            "authorId": 1,
+            "authorName": "作者A"
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-lorebooks-entry-batch-save",
+    "description": "批量保存角色知识库条目 一次提交多个知识条目 用于角色编辑页面的知识库管理",
+    "method": "POST",
+    "path": "/api/role/lorebooks/entry/batch/save",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-lorebooks-entry-list",
+    "description": "获取角色知识库的条目列表 展示所有知识条目 用于知识库管理页面",
+    "method": "POST",
+    "path": "/api/role/lorebooks/entry/list",
+    "response": {
+      "code": 0,
+      "data": {
+        "total": 20,
+        "list": [
+          {
+            "id": 1,
+            "keyword": "魔法",
+            "content": "这个世界的魔法体系",
+            "enabled": true
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-lorebooks-fetch",
+    "description": "拉取角色知识库的完整内容 在对话过程中根据上下文匹配相关知识条目 注入到AI提示词中",
+    "method": "POST",
+    "path": "/api/role/lorebooks/fetch",
+    "response": {
+      "code": 0,
+      "data": {
+        "id": 1,
+        "entries": [
+          {
+            "id": 1,
+            "keyword": "魔法",
+            "content": "这个世界的魔法体系",
+            "enabled": true
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-lorebooks-info",
+    "description": "获取角色知识库(lorebook)的基本信息 知识库用于增强AI对角色世界观/设定的理解",
+    "method": "POST",
+    "path": "/api/role/lorebooks/info",
+    "response": {
+      "code": 0,
+      "data": {
+        "id": 1,
+        "name": "角色知识库",
+        "entryCount": 20
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-origin-set",
+    "description": "设置角色的原始来源信息 标注角色是原创还是改编自其他作品 由角色创建者设置",
+    "method": "POST",
+    "path": "/api/role/origin/set",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-point-top",
+    "description": "消耗积分将角色推上热门排行榜顶部 是付费推广功能 让角色获得更多曝光",
+    "method": "POST",
+    "path": "/api/role/point/top",
+    "response": {
+      "code": 0,
+      "data": {
+        "total": 30,
+        "list": [
+          {
+            "id": 1,
+            "name": "角色A",
+            "avatar": "https://example.com/avatar.png",
+            "points": 1000
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-query",
+    "description": "查询角色详细信息 包括角色设定/作者/统计数据等 是进入角色聊天前的关键接口 用于角色详情页展示",
+    "method": "POST",
+    "path": "/api/role/query",
+    "response": {
+      "code": 0,
+      "data": {
+        "id": 1,
+        "name": "角色A",
+        "avatar": "https://example.com/avatar.png",
+        "description": "角色描述",
+        "systemPrompt": "你是一个友善的助手",
+        "openingMessage": "你好 有什么可以帮你的",
+        "category": "游戏",
+        "tags": [
+          "RPG",
+          "冒险"
+        ],
+        "authorId": 1,
+        "authorName": "作者A",
+        "likeCount": 50,
+        "chatCount": 200,
+        "commentCount": 30,
+        "isLiked": false,
+        "isFav": false,
+        "modelId": 1,
+        "backgroundUrl": "https://example.com/bg.png"
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-regexp-cover-save",
+    "description": "覆盖保存角色正则规则 与regexp-save不同 此接口会覆盖已有的同名规则",
+    "method": "POST",
+    "path": "/api/role/regexp/coverSave",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-regexp-delete",
+    "description": "删除指定的角色正则规则",
+    "method": "POST",
+    "path": "/api/role/regexp/delete",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-regexp-list",
+    "description": "获取角色的正则表达式规则列表 正则规则用于对AI回复内容进行格式化处理(如文本替换/样式标记等)",
+    "method": "POST",
+    "path": "/api/role/regexp/list",
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "id": 1,
+          "pattern": "*(.+?)*",
+          "replacement": "<em>$1</em>",
+          "sort": 1
+        }
+      ],
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-regexp-save",
+    "description": "保存/添加角色正则规则 用于创建新的文本处理规则",
+    "method": "POST",
+    "path": "/api/role/regexp/save",
+    "response": {
+      "code": 0,
+      "data": {
+        "id": 1
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-regexp-sort",
+    "description": "调整角色正则规则的排序顺序 规则按顺序执行 排序影响文本处理的优先级",
+    "method": "POST",
+    "path": "/api/role/regexp/sort",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-save",
+    "description": "创建新角色 提交角色设定/头像/描述等信息 创建成功后返回角色ID 是角色创建流程的核心接口",
+    "method": "POST",
+    "path": "/api/role/save",
+    "response": {
+      "code": 0,
+      "data": {
+        "id": 1
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-score-create",
+    "description": "对角色打分/评分 用户对角色体验进行评价 评分结果会影响角色的整体评分展示",
+    "method": "POST",
+    "path": "/api/role/score/create",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-top",
+    "description": "置顶或取消置顶角色 置顶后角色在用户的角色列表中排在最前面 方便快速访问常用角色",
+    "method": "POST",
+    "path": "/api/role/top",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-topic-detail",
+    "description": "获取话题详情 包括话题名称/描述/角色数量等 用于话题详情页展示",
+    "method": "POST",
+    "path": "/api/role/topic/detail",
+    "response": {
+      "code": 0,
+      "data": {
+        "id": 1,
+        "name": "热门话题",
+        "description": "话题描述",
+        "roleCount": 10
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-topic-is-sensitive-word",
+    "description": "检测话题名称是否包含敏感词 在创建/搜索话题前进行内容审核",
+    "method": "POST",
+    "path": "/api/role/topic/isSensitiveWord",
+    "response": {
+      "code": 0,
+      "data": {
+        "isSensitive": false
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "role-topic-search",
+    "description": "搜索话题 根据关键词查找话题 用于话题搜索页面",
+    "method": "POST",
+    "path": "/api/role/topic/search",
+    "response": {
+      "code": 0,
+      "data": {
+        "total": 5,
+        "list": [
+          {
+            "id": 1,
+            "name": "热门话题"
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "telegram-auth",
+    "description": "Telegram第三方登录认证 提交Telegram Bot返回的认证数据 服务端验证后返回token和用户信息",
+    "method": "POST",
+    "path": "/api/telegram/auth",
+    "response": {
+      "code": 0,
+      "data": {
+        "token": "eyJhbGciOiJIUzI1NiJ9",
+        "userInfo": {
+          "id": 1,
+          "nickname": "user1",
+          "avatar": "https://example.com/avatar.png"
+        }
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "translate",
+    "description": "翻译接口 将文本翻译为指定语言 可能用于多语言环境下的消息翻译",
+    "method": "POST",
+    "path": "/api/translate",
+    "response": {
+      "code": 0,
+      "data": {
+        "translatedText": "Hello World"
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-author-info",
+    "description": "查询指定作者(角色创建者)的公开信息 包括昵称/头像/角色数量/粉丝数 用于角色详情页展示作者信息或用户主页",
+    "method": "POST",
+    "path": "/api/user/author/info",
+    "response": {
+      "code": 0,
+      "data": {
+        "id": 1,
+        "nickname": "author1",
+        "avatar": "https://example.com/avatar.png",
+        "roleCount": 5,
+        "followerCount": 100
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-badge-cancel-wear",
+    "description": "取消当前佩戴的徽章 不需要指定ID 直接移除当前佩戴的徽章",
+    "method": "POST",
+    "path": "/api/user/badge/cancelWear",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-badge-list-all",
+    "description": "获取系统全部徽章列表 含分类和拥有状态 用于徽章墙/成就展示 展示所有可获得的徽章及获取状态",
+    "method": "POST",
+    "path": "/api/user/badge/listAll",
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "id": 1,
+          "name": "badge1",
+          "icon": "https://example.com/badge1.png",
+          "category": "achievement",
+          "owned": true
+        }
+      ],
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-badge-list-new",
+    "description": "获取用户新获得但尚未查看的徽章列表 用于新徽章提示/弹窗展示 查看后应标记为已读",
+    "method": "POST",
+    "path": "/api/user/badge/list/new",
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "id": 1,
+          "name": "badge1",
+          "icon": "https://example.com/badge1.png"
+        }
+      ],
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-badge-list",
+    "description": "获取当前用户的徽章列表 包含拥有状态 用于徽章展示页面 只返回与用户相关的徽章",
+    "method": "POST",
+    "path": "/api/user/badge/list",
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "id": 1,
+          "name": "badge1",
+          "icon": "https://example.com/badge1.png",
+          "owned": true
+        }
+      ],
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-badge-wear",
+    "description": "佩戴指定徽章 佩戴后在用户头像旁展示该徽章 同一时间只能佩戴一个徽章",
+    "method": "POST",
+    "path": "/api/user/badge/wear",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-bind-email",
+    "description": "为当前账号绑定邮箱 通常用于游客账号或第三方登录账号补充邮箱信息 需要先发送验证码到目标邮箱",
+    "method": "POST",
+    "path": "/api/user/bind/email",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-blacklist-list",
+    "description": "分页查询当前用户的黑名单列表 展示被拉黑用户的基本信息",
+    "method": "POST",
+    "path": "/api/user/blacklist/list",
+    "response": {
+      "code": 0,
+      "data": {
+        "total": 5,
+        "list": [
+          {
+            "id": 1,
+            "nickname": "user1",
+            "avatar": "https://example.com/avatar.png"
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-blacklist-operation",
+    "description": "将指定用户加入或移出黑名单 operation字段控制操作类型(加入/移除) 加入黑名单后该用户的角色和消息将被屏蔽",
+    "method": "POST",
+    "path": "/api/user/blacklist/operation",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-edit-password-email",
+    "description": "通过邮箱验证码重置密码 适用于忘记密码的场景 需要先调用 email-send-code 发送验证码到用户邮箱",
+    "method": "POST",
+    "path": "/api/user/edit-password-email",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-edit-password",
+    "description": "通过旧密码验证身份后设置新密码 需要登录状态 适用于用户记得旧密码的场景 如果忘记密码应使用 user-edit-password-email 通过邮箱验证码重置",
+    "method": "POST",
+    "path": "/api/user/edit-password",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-edit",
+    "description": "修改当前用户的昵称和头像 需要登录状态 修改成功后前端通常会重新调用 user-info 刷新本地用户信息缓存",
+    "method": "POST",
+    "path": "/api/user/edit",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-fans-list",
+    "description": "分页查询当前用户的粉丝列表 展示关注了自己的用户信息",
+    "method": "POST",
+    "path": "/api/user/fans/list",
+    "response": {
+      "code": 0,
+      "data": {
+        "total": 10,
+        "list": [
+          {
+            "id": 1,
+            "nickname": "user1",
+            "avatar": "https://example.com/avatar.png"
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-folder-add",
+    "description": "创建角色分组文件夹 用于将收藏/创建的角色分类管理 创建成功后返回文件夹ID",
+    "method": "POST",
+    "path": "/api/user/folder/add",
+    "response": {
+      "code": 0,
+      "data": {
+        "id": 1
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-folder-delete",
+    "description": "删除指定文件夹 文件夹内的角色会移回默认分组 不会删除角色本身",
+    "method": "POST",
+    "path": "/api/user/folder/delete",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-folder-list",
+    "description": "获取当前用户的所有文件夹列表 包含每个文件夹的ID/名称/角色数量 用于角色分组管理",
+    "method": "POST",
+    "path": "/api/user/folder/list",
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "id": 1,
+          "name": "default",
+          "roleCount": 3
+        }
+      ],
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-folder-migrate",
+    "description": "将指定角色移动到目标文件夹 用于角色分组管理 一个角色只能属于一个文件夹",
+    "method": "POST",
+    "path": "/api/user/folder/migrate",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-folder-rename",
+    "description": "修改文件夹名称",
+    "method": "POST",
+    "path": "/api/user/folder/rename",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-follow-list",
+    "description": "分页查询当前用户关注的用户列表 展示已关注用户的基本信息(昵称/头像等)",
+    "method": "POST",
+    "path": "/api/user/follow/list",
+    "response": {
+      "code": 0,
+      "data": {
+        "total": 10,
+        "list": [
+          {
+            "id": 1,
+            "nickname": "user1",
+            "avatar": "https://example.com/avatar.png"
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-follow-status",
+    "description": "查询当前用户是否关注了指定目标用户 常用于角色详情页/用户主页中显示关注按钮状态",
+    "method": "POST",
+    "path": "/api/user/followStatus",
+    "response": {
+      "code": 0,
+      "data": {
+        "followed": true
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-follow",
+    "description": "关注或取消关注指定用户 是toggle操作 调用一次关注 再调用一次取消关注 关注后可在 user-follow-list 中查看关注列表 也可通过 role-follow-follow-user-list 查看关注用户发布的角色",
+    "method": "POST",
+    "path": "/api/user/follow",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-get-block-categories",
+    "description": "获取用户设置的屏蔽分类列表 用户可以屏蔽特定分类的角色 不在推荐/列表中展示",
+    "method": "POST",
+    "path": "/api/user/getBlockCategories",
+    "response": {
+      "code": 0,
+      "data": [
+        "category1",
+        "category2"
+      ],
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-guest",
+    "description": "无需账号密码的游客快速登录方式 系统分配临时token和userId 游客可体验基础功能 后续可通过 user-bind-email 绑定邮箱升级为正式用户",
+    "method": "POST",
+    "path": "/api/user/guest",
+    "response": {
+      "code": 0,
+      "data": {
+        "token": "eyJhbGciOiJIUzI1NiJ9",
+        "userId": 1
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-info",
+    "description": "获取当前登录用户的完整信息 通过header中的token鉴权 通常在登录后 页面初始化时调用 用于展示用户头像/昵称/积分/VIP等级等",
+    "method": "POST",
+    "path": "/api/user/info",
+    "response": {
+      "code": 0,
+      "data": {
+        "id": 1,
+        "nickname": "user1",
+        "avatar": "https://example.com/avatar.png",
+        "email": "user@example.com",
+        "points": 100,
+        "vipLevel": 1,
+        "createTime": "2026-01-01 00:00:00"
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-login",
+    "description": "用户通过账号密码登录系统 需要先调用 captcha-image 获取验证码ID和图片 登录成功后返回token和用户信息 token用于后续所有需要鉴权的接口请求",
+    "method": "POST",
+    "path": "/api/user/login",
+    "response": {
+      "code": 0,
+      "data": {
+        "token": "eyJhbGciOiJIUzI1NiJ9",
+        "userInfo": {
+          "id": 1,
+          "nickname": "user1",
+          "avatar": "https://example.com/avatar.png",
+          "email": "user@example.com",
+          "points": 100,
+          "vipLevel": 1
+        }
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-migrate-resources",
+    "description": "迁移用户资源 将游客账号的数据(对话记录/收藏等)迁移到正式账号 在游客转正式用户时使用",
+    "method": "POST",
+    "path": "/api//user/migrateResources",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-register",
+    "description": "通过邮箱注册新用户 需要先调用 email-send-code 发送邮箱验证码 注册成功后直接返回token和用户信息 无需再次登录",
+    "method": "POST",
+    "path": "/api/user/register",
+    "response": {
+      "code": 0,
+      "data": {
+        "token": "eyJhbGciOiJIUzI1NiJ9",
+        "userInfo": {
+          "id": 1,
+          "nickname": "user1",
+          "avatar": "https://example.com/avatar.png",
+          "email": "user@example.com"
+        }
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-report-nickname",
+    "description": "举报用户昵称 当发现用户使用违规昵称时进行举报 由平台审核处理",
+    "method": "POST",
+    "path": "/api/user/reportNickname",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-save-block-categories",
+    "description": "保存用户的屏蔽分类设置 设置后对应分类的角色不再出现在推荐和列表中",
+    "method": "POST",
+    "path": "/api/user/saveBlockCategories",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-search",
+    "description": "根据关键词搜索用户 支持分页 用于在搜索页面按昵称等信息查找用户",
+    "method": "POST",
+    "path": "/api/user/search",
+    "response": {
+      "code": 0,
+      "data": {
+        "total": 10,
+        "list": [
+          {
+            "id": 1,
+            "nickname": "user1",
+            "avatar": "https://example.com/avatar.png"
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-sign-in",
+    "description": "每日签到领取积分 返回本次获得的积分数和连续签到天数 每天只能签到一次 连续签到天数越多奖励可能越高",
+    "method": "POST",
+    "path": "/api/user/sign-in",
+    "response": {
+      "code": 0,
+      "data": {
+        "points": 10,
+        "consecutiveDays": 7
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-storage-delete",
+    "description": "删除指定的用户存储文件",
+    "method": "POST",
+    "path": "/api/user/storage/delete",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-storage-info",
+    "description": "获取指定存储文件的详细信息 包含文件名/URL/大小/创建时间",
+    "method": "POST",
+    "path": "/api/user/storage/info",
+    "response": {
+      "code": 0,
+      "data": {
+        "id": 1,
+        "name": "file1.png",
+        "url": "https://example.com/file1.png",
+        "size": 1024,
+        "createTime": "2026-01-01 00:00:00"
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-storage-list",
+    "description": "获取当前用户上传的文件存储列表 包含文件名/URL/大小/创建时间 用于用户文件管理页面",
+    "method": "POST",
+    "path": "/api/user/storage/list",
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "id": 1,
+          "name": "file1.png",
+          "url": "https://example.com/file1.png",
+          "size": 1024,
+          "createTime": "2026-01-01 00:00:00"
+        }
+      ],
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-storage-rename",
+    "description": "修改指定存储文件的名称",
+    "method": "POST",
+    "path": "/api/user/storage/rename",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-task-list",
+    "description": "获取当前用户的每日任务列表 包括任务名称/描述/奖励积分/完成状态/进度 用于任务中心展示",
+    "method": "POST",
+    "path": "/api/user/task/list",
+    "response": {
+      "code": 0,
+      "data": [
+        {
+          "id": 1,
+          "name": "daily_chat",
+          "description": "每日对话",
+          "reward": 10,
+          "status": 0,
+          "progress": 3,
+          "target": 5
+        }
+      ],
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-tg-login",
+    "description": "Telegram Mini App内的快速登录 在Telegram小程序环境中使用Telegram用户信息直接登录",
+    "method": "POST",
+    "path": "/api/user/tg/login",
+    "response": {
+      "code": 0,
+      "data": {
+        "token": "eyJhbGciOiJIUzI1NiJ9",
+        "userInfo": {
+          "id": 1,
+          "nickname": "tg_user",
+          "avatar": "https://example.com/avatar.png"
+        }
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-topic-follow-list",
+    "description": "分页查询当前用户已关注的话题列表 用于话题管理页面展示",
+    "method": "POST",
+    "path": "/api/user/topic/follow/list",
+    "response": {
+      "code": 0,
+      "data": {
+        "total": 10,
+        "list": [
+          {
+            "id": 1,
+            "name": "topic1"
+          }
+        ]
+      },
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-topic-operation",
+    "description": "对话题执行关注/取消关注等操作 关注话题后可在 user-topic-follow-list 中查看已关注话题 也可通过 role-list-topic 查看该话题下的角色列表",
+    "method": "POST",
+    "path": "/api/user/topic/operation",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  },
+  {
+    "file": "user-tutorial",
+    "description": "记录用户完成新手教程的步骤进度 前端引导教程每完成一步调用此接口上报 避免用户重复看到已完成的教程步骤",
+    "method": "POST",
+    "path": "/api/user/tutorial",
+    "response": {
+      "code": 0,
+      "data": null,
+      "message": "success"
+    }
+  }
+]

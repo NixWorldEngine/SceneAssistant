@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OCS Mock Environment</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #1a1a2e; color: #e0e0e0; padding: 20px; }
+.status { background: #16213e; border: 1px solid #0f3460; border-radius: 8px; padding: 16px; margin-bottom: 20px; }
+.status h2 { color: #e94560; margin-bottom: 8px; font-size: 16px; }
+.status .badge { display: inline-block; background: #e94560; color: #fff; padding: 2px 10px; border-radius: 4px; font-size: 12px; margin-left: 8px; }
+.status .info { font-size: 13px; color: #999; margin-top: 4px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-bottom: 20px; }
+button { background: #16213e; border: 1px solid #0f3460; color: #e0e0e0; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; transition: background .15s; text-align: left; }
+button:hover { background: #0f3460; }
+button:active { background: #e94560; }
+button .label { font-weight: 600; display: block; margin-bottom: 2px; }
+button .desc { font-size: 11px; color: #888; }
+#log { background: #0d1117; border: 1px solid #0f3460; border-radius: 8px; padding: 12px; font-family: monospace; font-size: 12px; max-height: 400px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; }
+.log-ok { color: #4caf50; }
+.log-err { color: #e94560; }
+.log-info { color: #888; }
+</style>
+</head>
+<body>
+
+<div class="status">
+  <h2>OCS Mock Environment <span class="badge">MOCK</span></h2>
+  <div class="info" id="bridge-status">Checking bridge...</div>
+  <div class="info" id="server-status">Checking server...</div>
+</div>
+
+<div class="grid">
+  <button onclick="testSessionInit()">
+    <span class="label">session.init</span>
+    <span class="desc">Initialize session / load models + role</span>
+  </button>
+  <button onclick="testConvList()">
+    <span class="label">conversation.list</span>
+    <span class="desc">Fetch conversation list</span>
+  </button>
+  <button onclick="testConvOpen()">
+    <span class="label">conversation.open</span>
+    <span class="desc">Create new conversation</span>
+  </button>
+  <button onclick="testRoleQuery()">
+    <span class="label">role.query</span>
+    <span class="desc">Query role details</span>
+  </button>
+  <button onclick="testModelList()">
+    <span class="label">model.list</span>
+    <span class="desc">List available models</span>
+  </button>
+  <button onclick="testMsgHistory()">
+    <span class="label">message.history</span>
+    <span class="desc">Fetch message history</span>
+  </button>
+  <button onclick="testSendNonStream()">
+    <span class="label">message.send (non-stream)</span>
+    <span class="desc">Send message without streaming</span>
+  </button>
+  <button onclick="testSendStream()">
+    <span class="label">message.send (stream)</span>
+    <span class="desc">Send message with SSE streaming</span>
+  </button>
+  <button onclick="testIdb()">
+    <span class="label">storage.idb</span>
+    <span class="desc">Test IndexedDB put/get/remove</span>
+  </button>
+  <button onclick="testClipboard()">
+    <span class="label">clipboard.write</span>
+    <span class="desc">Copy text to clipboard</span>
+  </button>
+  <button onclick="testKag()">
+    <span class="label">kag.getMergedIds</span>
+    <span class="desc">Test KAG bridge</span>
+  </button>
+  <button onclick="testSessionGet()">
+    <span class="label">session.get</span>
+    <span class="desc">Get session info + device</span>
+  </button>
+</div>
+
+<div id="log"></div>
+
+<script src="ocs-bridge.js"></script>
+<script>
+var logEl = document.getElementById("log");
+var B = window.OCS;
+
+function log(cls, msg) {
+  var line = document.createElement("div");
+  line.className = cls;
+  line.textContent = "[" + new Date().toLocaleTimeString() + "] " + msg;
+  logEl.appendChild(line);
+  logEl.scrollTop = logEl.scrollHeight;
+}
+
+function ok(msg) { log("log-ok", msg); }
+function err(msg) { log("log-err", msg); }
+function info(msg) { log("log-info", msg); }
+
+function run(label, promise) {
+  info(label + " ...");
+  promise.then(function (r) {
+    ok(label + " => " + JSON.stringify(r, null, 0).substring(0, 500));
+  }).catch(function (e) {
+    err(label + " => " + (e.message || e));
+  });
+}
+
+(function checkBridge() {
+  var el = document.getElementById("bridge-status");
+  if (B) {
+    el.textContent = "Bridge: OK (version " + (B._meta && B._meta.version || "?") + ")";
+    el.style.color = "#4caf50";
+  } else {
+    el.textContent = "Bridge: NOT FOUND";
+    el.style.color = "#e94560";
+  }
+})();
+
+(function checkServer() {
+  var el = document.getElementById("server-status");
+  fetch("http://localhost:3939/api/model/list", { method: "POST" })
+    .then(function (r) { return r.json(); })
+    .then(function () {
+      el.textContent = "Server: OK (localhost:3939)";
+      el.style.color = "#4caf50";
+    })
+    .catch(function () {
+      el.textContent = "Server: OFFLINE - run 'node mock-server.js' first";
+      el.style.color = "#e94560";
+    });
+})();
+
+function testSessionInit() { run("session.init", B.session.init()); }
+function testConvList() { run("conversation.list", B.conversation.list()); }
+function testConvOpen() { run("conversation.open (new)", B.conversation.open()); }
+function testRoleQuery() { run("role.query", B.role.query()); }
+function testModelList() { run("model.list", B.model.list()); }
+function testMsgHistory() { run("message.history", B.message.history(1)); }
+
+function testSendNonStream() {
+  run("message.send (non-stream)", B.message.send("Hello mock", { id: 1, token: 4096, stream: false }));
+}
+
+function testSendStream() {
+  info("message.send (stream) ...");
+  var cb = B.message.send("Hello stream", { id: 1, token: 4096, stream: true });
+  var chunks = [];
+  cb.onmsg = function (c) { chunks.push(c); };
+  cb.ondone = function (content, msgId) {
+    ok("stream done => chunks=[" + chunks.join("") + "] msgId=" + msgId);
+  };
+  cb.onerr = function (e) { err("stream error => " + e); };
+}
+
+function testIdb() {
+  var idb = B.storage.idb;
+  idb.put("test_db", "k1", { hello: "world" })
+    .then(function () { return idb.get("test_db", "k1"); })
+    .then(function (v) {
+      ok("idb.get => " + JSON.stringify(v));
+      return idb.remove("test_db", "k1");
+    })
+    .then(function () { return idb.get("test_db", "k1"); })
+    .then(function (v) { ok("idb after remove => " + JSON.stringify(v)); })
+    .catch(function (e) { err("idb => " + e.message); });
+}
+
+function testClipboard() { run("clipboard.write", B.clipboard.write("mock clipboard text")); }
+function testKag() { run("kag.getMergedIds", B.kag.getMergedIds()); }
+
+function testSessionGet() {
+  var r = B.session.get();
+  ok("session.get => " + JSON.stringify(r));
+}
+</script>
+</body>
+</html>

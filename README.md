@@ -1,54 +1,90 @@
-# SceneAssistant「剧本助手」使用指南
+# SceneAssistant
 
-## 综述
+世界引擎项目中的剧本助手 基于 Claude Code 的全自动化角色/世界观创作工具
 
-欢迎使用世界引擎项目中的剧本助手 这个助手可以为你实现如下功能
-- 从几个绝妙的点子扩增出完整的人物
-- 从零散的设定整理出完善的世界观
-- 为人物填充丰富的设定 包括过往经历 性格 穿衣风格 说话风格等
+功能
+- 从灵感碎片扩增出完整角色设定
+- 从零散设定整理出系统化世界观
+- 一体式页面生成 内置 18 种预设风格
+- 自动化编译/部署到角色卡平台
 
-该系统具有以下特色
-- 全自动化内容生成 基于Claude Code
-- 内含破甲提示词 可以生成任何内容
-- 一体式页面生成 内置18种预设风格+配色方案
-- 互动式内容扩增 减少文本键入
-- 利用skills/rules/hook互相配合实现自动化构建
+---
+
+## 目录结构
+
+| 目录 | 用途 |
+|------|------|
+| reference/ | 灵感碎片 创意笔记 AI 只读不写 |
+| profile/ | 格式化的角色/世界观设定 |
+| output/ | 最终定稿 英文版本 token 优化后 |
+| views/pages/ | 视图页面项目 (chat 等) |
+| views/pages/template/ | 项目模板 只读 创建新项目时拷贝 |
+| views/shared/ | 共享 Vite 配置 |
+| views/compile/ | 编译和部署工具 |
+| views/docs/ | OCS 接口文档 (68 个函数 17 个命名空间) |
+| views/mock/ | 无 OCS 源码的模拟 SDK 环境 |
 
 ---
 
 ## 使用指南
 
-你只需要按照以下步骤即可开始使用
-前提条件: 你需要已经在VSCode中登录Claude Code
-1. [点击下载](https://codeload.github.com/NixWorldEngine/SceneAssistant/zip/refs/heads/main)该项目
-2. 将其解压缩到一个文件夹中
-3. 在VSCode中在这个文件夹内打开一个新项目
-4. 开始你的编辑
+### 前提条件
 
----
+- 已安装 Node.js 和 Python
+- 已在 VSCode 中登录 Claude Code
 
-## 结构介绍
+### 快速开始
 
-### reference
+1. 下载本项目
+2. 在 VSCode 中打开
+3. 使用以下命令开始创作
 
-这里面存放你绝妙的点子 请以markdown(.md)格式书写你的创意 AI将会自动读取 这个文件夹中的任何文件都不会被AI主动修改 AI只会从其中读取
+### CC 命令
 
-### design
+| 命令 | 用途 |
+|------|------|
+| /check-profile | 检查 profile 和 reference 中的设定冲突 |
+| /create-profile | 从 reference 生成格式化设定到 profile |
+| /create-npc | 快速生成边缘角色 |
+| /create-person | 详细创建主角团成员 |
+| /compile-profile | 翻译设定为英文 优化 token 到 output |
+| /compile-view | 编译视图为 PNG 并可选部署 |
 
-这是AI生成的定稿后的内容 是AI可以实际修改编辑的区域 也是你可以查看最终定稿的为止
+### 视图开发
 
-### view
+```bash
+cd views/pages/chat
+npm install
+npm run dev
+```
 
-这是AI生成的剧本页面代码 会包含一份index.html供你使用
+启动后自动运行 mock 服务器 提供全部 OCS API 模拟
+接口文档见 `views/docs/`
 
-### .claude
+### 创建新视图项目
 
-这里是系统设定 包含三个文件夹和一个文件
-- authorizations
-  储存着"授权文件" 作用是对于Claude进行破甲
-- rules
-  储存着Claude在每个文件夹进行工作时需要遵守的规则
-- styles
-  储存着生成页面时可以使用的样式描述
-- CLAUDE.md
-  Claude的系统提示词 这份提示词会被无条件注入每次对话
+1. 拷贝 `views/pages/template/ide/` 到 `views/pages/{项目名}/`
+2. 修改 package.json 和 vite.config.ts
+3. `npm run dev` 开始开发
+
+### 编译和部署
+
+1. 复制 `views/compile/config.example.yaml` 为 `views/compile/config.yaml`
+2. 填写你的凭证 (authorization / rptoken)
+3. 填写部署目标 (roleId / folderId / regexId)
+4. 运行 `/compile-view` 或手动执行:
+
+```bash
+node views/compile/build.js --view chat
+python views/compile/deploy.py --png views/dist/view-chat-v1.0.0.png
+```
+
+### Mock 环境
+
+用于离线开发和调试视图 无需 OCS 源码
+
+```bash
+node views/mock/mock-server.js
+```
+
+打开 `views/mock/index.html` 即可测试

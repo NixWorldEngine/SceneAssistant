@@ -1,3 +1,6 @@
 node_modules/
 dist/
 *.log
+compile/config.yaml
+output/
+*.png

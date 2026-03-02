@@ -1,0 +1,11 @@
+version: 1.0.0
+authorization:
+rptoken:
+roleId:
+folderId:
+regexId:
+cdn:
+  url: https://meimoaiimg.com/user/
+  upload_url: https://sexyai.top/api
+injector:
+  source: https://github.com/NixWorldEngine/SceneAssistant/releases/latest
